@@ -9,12 +9,12 @@ app.use(express.json());
 app.use(express.static('.'));
 
 // Criar cliente
-app.post('/cliente', (req, res) => {
-    const { cpf, nome } = req.body;
+app.post('/Cadastro_Programador', (req, res) => {
+    const { nome, linguagemDeProgramacao, areaDeAtuacao, idade } = req.body;
 
-    const codigoDoMySQL = 'INSERT INTO cliente (cpf, nome) VALUES (?, ?)';
+    const codigoDoMySQL = 'INSERT INTO Cadastro_Programador (nome, linguagem_de_Programacao, areaDeAtuacao, idade) VALUES (?, ?, ?, ?)';
 
-    acessaBancoNoServidor.query(codigoDoMySQL, [cpf, nome], (err, results) => {
+    acessaBancoNoServidor.query(codigoDoMySQL, [nome, linguagemDeProgramacao, areaDeAtuacao, idade], (err, results) => {
         if (err) {
             return res.json({ error: 'Erro ao cadastrar' });
         }
@@ -23,8 +23,8 @@ app.post('/cliente', (req, res) => {
 });
 
 // Listar clientes
-app.get('/clientes', (req, res) => {
-    const codigoDoMySQL = 'SELECT cpf, nome FROM cliente';
+app.get('/Cadastro_Programador', (req, res) => {
+    const codigoDoMySQL = 'SELECT id_programador, nome, linguagem_de_Programacao, areaDeAtuacao, idade FROM Cadastro_Programador';
 
     acessaBancoNoServidor.query(codigoDoMySQL, (err, results) => {
         if (err) {
@@ -37,3 +37,4 @@ app.get('/clientes', (req, res) => {
 app.listen(3000, () => {
     console.log('Servidor rodando em http://localhost:3000');
 });
+

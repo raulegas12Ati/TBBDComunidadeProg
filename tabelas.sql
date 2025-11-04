@@ -25,11 +25,12 @@ CREATE Table Cadastro_Programador(
     id_programador INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR (100),
     linguagem_de_Programacao VARCHAR (100),
-    tipo_de_programa VARCHAR (100),
+    areaDeAtuacao VARCHAR (100),
     idade INT
 );
 
 ALTER TABLE Cadastro_Programador AUTO_INCREMENT = 100;
 
-SELECT id_programador, nome, linguagem_de_Programacao, tipo_de_programa, idade FROM Cadastro_Programador;
+SELECT id_programador, nome, linguagem_de_Programacao, areaDeAtuacao, idade FROM Cadastro_Programador;
+
 
