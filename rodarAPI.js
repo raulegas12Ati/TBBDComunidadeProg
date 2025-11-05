@@ -9,10 +9,10 @@ app.use(express.json());
 app.use(express.static('.'));
 
 // Criar cliente
-app.post('/Cadastro_Programador', (req, res) => {
+app.post('/CadastroProgramador', (req, res) => {
     const { nome, linguagemDeProgramacao, areaDeAtuacao, idade } = req.body;
 
-    const codigoDoMySQL = 'INSERT INTO Cadastro_Programador (nome, linguagem_de_Programacao, areaDeAtuacao, idade) VALUES (?, ?, ?, ?)';
+    const codigoDoMySQL = 'INSERT INTO Cadastro_Programador (nome, linguagemDeProgramacao, areaDeAtuacao, idade) VALUES (?, ?, ?, ?)';
 
     acessaBancoNoServidor.query(codigoDoMySQL, [nome, linguagemDeProgramacao, areaDeAtuacao, idade], (err, results) => {
         if (err) {
@@ -23,8 +23,8 @@ app.post('/Cadastro_Programador', (req, res) => {
 });
 
 // Listar clientes
-app.get('/Cadastro_Programador', (req, res) => {
-    const codigoDoMySQL = 'SELECT id_programador, nome, linguagem_de_Programacao, areaDeAtuacao, idade FROM Cadastro_Programador';
+app.get('/CadastroProgramador', (req, res) => {
+    const codigoDoMySQL = 'SELECT id_programador, nome, linguagemDeProgramacao, areaDeAtuacao, idade FROM Cadastro_Programador';
 
     acessaBancoNoServidor.query(codigoDoMySQL, (err, results) => {
         if (err) {

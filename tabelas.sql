@@ -21,16 +21,16 @@ FOREIGN KEY(cod_barra) REFERENCES produtos(cod_barra)
 
 use api_crud;
 
-CREATE Table Cadastro_Programador(
+CREATE Table CadastroProgramador(
     id_programador INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR (100),
-    linguagem_de_Programacao VARCHAR (100),
+    linguagemDeProgramacao VARCHAR (100),
     areaDeAtuacao VARCHAR (100),
     idade INT
 );
 
-ALTER TABLE Cadastro_Programador AUTO_INCREMENT = 100;
+ALTER TABLE CadastroProgramador AUTO_INCREMENT = 100;
 
-SELECT id_programador, nome, linguagem_de_Programacao, areaDeAtuacao, idade FROM Cadastro_Programador;
+SELECT id_programador, nome, linguagemDeProgramacao, areaDeAtuacao, idade FROM CadastroProgramador;
 
 

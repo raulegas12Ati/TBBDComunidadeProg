@@ -1,12 +1,12 @@
 document.getElementById('formCliente').addEventListener('submit', async function (e) {
     e.preventDefault();
 
-    const areaDeAtuacao = document.getElementById('area_de_atuacao').value;
+    const areaDeAtuacao = document.getElementById('areaDeAtuacao').value;
     const nome = document.getElementById('nome').value;
     const idade = document.getElementById('idade').value;
-    const linguagemDeProgramacao = document.getElementById('linguagem_de_programacao').value;
+    const linguagemDeProgramacao = document.getElementById('linguagemDeProgramacao').value;
 
-    const response = await fetch('http://localhost:3000/cliente', {
+    const response = await fetch('http://localhost:3000/CadastroProgramador', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ areaDeAtuacao, nome, linguagemDeProgramacao, idade })
