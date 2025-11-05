@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const acessaBancoNoServidor = require('./acessaBancoNoServidor');
+const acessaBancoNoServidor = require('./acessaBancoNoServidor.cjs');
 
 const app = express();
 
@@ -12,7 +12,7 @@ app.use(express.static('.'));
 app.post('/CadastroProgramador', (req, res) => {
     const { nome, linguagemDeProgramacao, areaDeAtuacao, idade } = req.body;
 
-    const codigoDoMySQL = 'INSERT INTO Cadastro_Programador (nome, linguagemDeProgramacao, areaDeAtuacao, idade) VALUES (?, ?, ?, ?)';
+    const codigoDoMySQL = 'INSERT INTO CadastroProgramador (nome, linguagemDeProgramacao, areaDeAtuacao, idade) VALUES (?, ?, ?, ?)';
 
     acessaBancoNoServidor.query(codigoDoMySQL, [nome, linguagemDeProgramacao, areaDeAtuacao, idade], (err, results) => {
         if (err) {
