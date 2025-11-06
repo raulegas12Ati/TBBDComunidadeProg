@@ -22,5 +22,8 @@ document.getElementById('formCliente').addEventListener('submit', async function
     }
 });
 
+/*Me diga se existe algum erro{e qual é esse erro se tiver)
+ no código javaScript que vou te enviar, se não houver erro me exlique o código linha por linha */
+
 
 

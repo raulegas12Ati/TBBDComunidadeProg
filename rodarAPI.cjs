@@ -24,7 +24,7 @@ app.post('/CadastroProgramador', (req, res) => {
 
 // Listar clientes
 app.get('/CadastroProgramador', (req, res) => {
-    const codigoDoMySQL = 'SELECT id_programador, nome, linguagemDeProgramacao, areaDeAtuacao, idade FROM Cadastro_Programador';
+    const codigoDoMySQL = 'SELECT id_programador, nome, linguagemDeProgramacao, areaDeAtuacao, idade FROM CadastroProgramador';
 
     acessaBancoNoServidor.query(codigoDoMySQL, (err, results) => {
         if (err) {
