@@ -1,4 +1,4 @@
-document.getElementById('formCliente').addEventListener('submit', async function (e) {
+document.getElementById('formProgramador').addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const areaDeAtuacao = document.getElementById('areaDeAtuacao').value;
@@ -15,8 +15,8 @@ document.getElementById('formCliente').addEventListener('submit', async function
     const data = await response.json();
 
     if (response.ok) {
-        document.getElementById('message').textContent = 'Cliente cadastrado!';
-        document.getElementById('formCliente').reset();
+        document.getElementById('message').textContent = 'Programador cadastrado!';
+        document.getElementById('formProgramador').reset();
     } else {
         document.getElementById('message').textContent = 'Erro: ' + data.error;
     }

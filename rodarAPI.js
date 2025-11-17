@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const acessaBancoNoServidor = require('./acessaBancoNoServidor.cjs');
+const acessaBancoNoServidor = require('./acessaBancoNoServidor.js');
 
 const app = express();
 
@@ -18,7 +18,7 @@ app.post('/CadastroProgramador', (req, res) => {
         if (err) {
             return res.json({ error: 'Erro ao cadastrar' });
         }
-        res.json({ message: 'Cliente cadastrado!' });
+        res.json({ message: 'Programador cadastrado!' });
     });
 });
 
