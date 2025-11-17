@@ -5,11 +5,13 @@ document.getElementById('formProgramador').addEventListener('submit', async func
     const nome = document.getElementById('nome').value;
     const idade = document.getElementById('idade').value;
     const linguagemDeProgramacao = document.getElementById('linguagemDeProgramacao').value;
+    const senha = document.getElementById('senha').value;
+
 
     const response = await fetch('http://localhost:3000/CadastroProgramador', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ areaDeAtuacao, nome, linguagemDeProgramacao, idade })
+        body: JSON.stringify({ areaDeAtuacao, nome, linguagemDeProgramacao, idade, senha })
     });
 
     const data = await response.json();

@@ -33,4 +33,7 @@ ALTER TABLE CadastroProgramador AUTO_INCREMENT = 100;
 
 SELECT id_programador, nome, linguagemDeProgramacao, areaDeAtuacao, idade FROM CadastroProgramador;
 
+ALTER TABLE CadastroProgramador
+ADD senha int;
+
 
