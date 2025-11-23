@@ -34,62 +34,106 @@ app.get('/CadastroProgramador', (req, res) => {
     });
 });
 
-//alterar cliente
-app.get('/CadastroProgramador', (req, res) => {
-    const { name, linguagem, area, age } = req.body;
-    for (const i = 1; i < 5; i++){
-        if (area !== "") {
-            const codigoDoMySQL = `UPDATE CadastroProgramador
-              SET areaDeAtuacao = ${area}
-              WHERE senha = ${senha};
-              `
-            acessaBancoNoServidor.query(codigoDoMySQL, (err, results) => {
-                if (err) {
-                    return res.json({ error: 'Erro ao buscar' });
-                }
-                res.json(results);
-            });
+app.put('/updateProgramador/:id', (req, res) => {
+    const id = req.params.id;
+    const { nome, linguagemDeProgramacao, areaDeAtuacao, idade } = req.body;
+    const idadeNumero = Number(idade);
+
+    const codigoDoMySQL = 'UPDATE CadastroProgramador SET nome = ?, linguagemDeProgramacao = ?, areaDeAtuacao = ?, idade = ? WHERE id_programador = ?';
+
+    acessaBancoNoServidor.query(codigoDoMySQL, [nome, linguagemDeProgramacao, areaDeAtuacao, idadeNumero, id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Erro ao atualizar os dados do programador' });
         }
-        if (name !== "") {
-            const codigoDoMySQL = `UPDATE CadastroProgramador
-              SET nome = ${name}
-              WHERE senha = ${senha};
-              `
-            acessaBancoNoServidor.query(codigoDoMySQL, (err, results) => {
-                if (err) {
-                    return res.json({ error: 'Erro ao buscar' });
-                }
-                res.json(results);
-            });
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'programador não encontrado' });
         }
-        if (age !== "") {
-            const codigoDoMySQL = `UPDATE CadastroProgramador
-              SET idade = ${age}
-              WHERE senha = ${senha};
-              `
-            acessaBancoNoServidor.query(codigoDoMySQL, (err, results) => {
-                if (err) {
-                    return res.json({ error: 'Erro ao buscar' });
-                }
-                res.json(results);
-            });
-        }
-        if (linguagem !== "") {
-            const codigoDoMySQL = `UPDATE CadastroProgramador
-              SET linguagemDeProgramacao = ${linguagem}
-              WHERE senha = ${senha};
-              `
-            acessaBancoNoServidor.query(codigoDoMySQL, (err, results) => {
-                if (err) {
-                    return res.json({ error: 'Erro ao buscar' });
-                }
-                res.json(results);
-            });
-        }
-    }
+
+        res.json({ message: 'Dados do Programador atualizados com sucesso!' });
+    });
 });
 
 app.listen(3000, () => {
     console.log('Servidor rodando em http://localhost:3000');
 });
 
+/*
+const express = require('express');
+const cors = require('cors');
+const acessaBancoNoServidor = require('./acessaBancoNoServidor');
+
+const app = express();
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static('.'));
+
+// Criar vendas de combustível
+app.post('/vendaCombustivel', (req, res) => {
+    const { tipo_combustivel, preco, volume_abastecido, data_abastecimento } = req.body;
+
+    const codigoDoMySQL = 'INSERT INTO postos_de_gasolina (tipo_combustivel, preco, volume_abastecido, data_abastecimento) VALUES (?, ?, ?, ?)';
+
+    acessaBancoNoServidor.query(codigoDoMySQL, [tipo_combustivel, preco, volume_abastecido, data_abastecimento], (err, results) => {
+        if (err) {
+            return res.json({ error: 'Erro ao cadastrar' });
+        }
+        res.json({ message: 'Venda de combustível cadastrada!' });
+    });
+});
+
+// Listar vendas de combustível
+app.get('/vendaCombustivel', (req, res) => {
+    const codigoDoMySQL = 'SELECT * FROM postos_de_gasolina';
+
+    acessaBancoNoServidor.query(codigoDoMySQL, (err, results) => {
+        if (err) {
+            return res.json({ error: 'Erro ao buscar' });
+        }
+        res.json(results);
+    });
+});
+
+// Deletar venda de combustível
+app.delete('/vendaCombustivel/:id', (req, res) => {
+    const id = req.params.id;
+    const codigoDoMySQL = 'DELETE FROM postos_de_gasolina WHERE id = ?';
+
+    acessaBancoNoServidor.query(codigoDoMySQL, [id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Erro ao deletar venda' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Venda não encontrada' });
+        }
+
+        res.json({ message: 'Venda excluída com sucesso!' });
+    });
+});
+
+// Atualizar venda de combustível
+app.put('/vendaCombustivel/:id', (req, res) => {
+    const id = req.params.id;
+    const { tipo_combustivel, preco, volume_abastecido, data_abastecimento } = req.body;
+
+    const codigoDoMySQL = 'UPDATE postos_de_gasolina SET tipo_combustivel = ?, preco = ?, volume_abastecido = ?, data_abastecimento = ? WHERE id = ?';
+
+    acessaBancoNoServidor.query(codigoDoMySQL, [tipo_combustivel, preco, volume_abastecido, data_abastecimento, id], (err, result) => {
+        if (err) {
+            return res.status(500).json({ error: 'Erro ao atualizar venda' });
+        }
+
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ error: 'Venda não encontrada' });
+        }
+
+        res.json({ message: 'Venda atualizada com sucesso!' });
+    });
+});
+
+app.listen(3000, () => {
+    console.log('Servidor rodando em http://localhost:3000');
+});
+*/
