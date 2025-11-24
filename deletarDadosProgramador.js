@@ -1,29 +1,30 @@
-async function carregarVendas() {
-    const response = await fetch('http://localhost:3000/vendaCombustivel');
-    const vendas = await response.json();
+async function carregarDados() {
+    const response = await fetch('http://localhost:3000/CadastroProgramador');
+    const dadosProgramador = await response.json();
 
-    let html = '<table><tr><th>ID</th><th>Tipo de Combustível</th><th>Preço</th><th>Volume Abastecido</th><th>Data Abastecimento</th><th>Ação</th></tr>';
+    let html = '<table><tr><th>id</th><th>Nome</th><th>Linguagem de pogramação</th><th>área de atuação</th><th>idade</th></tr>';
 
-    vendas.forEach(venda => {
-        html += `<tr id="venda-${venda.id}">
-        <td>${venda.id}</td>
-        <td>${venda.tipo_combustivel}</td>
-        <td>${venda.preco}</td>
-        <td>${venda.volume_abastecido}</td>
-        <td>${venda.data_abastecimento}</td>
-        <td><button class="btn-deletar" onclick="deletarVenda(${venda.id})">🗑️</button></td>
+    dadosProgramador.forEach(dados => {
+        html += `<tr id="dados-${dados.id_programador}">
+        <td>${dados.id_programador}</td>
+        <td id="c-${dados.id_programador}-0">${dados.nome}</td>
+        <td id="c-${dados.id_programador}-1">${dados.linguagemDeProgramacao}</td>
+        <td id="c-${dados.id_programador}-2">${dados.areaDeAtuacao}</td>
+        <td id="c-${dados.id_programador}-3" data-val="${dados.idade}">${dados.idade}</td>
+        <td><button class="btn-deletar" onclick="deletarProgramador(${dados.id_programador})">🗑️</button></td>
         </tr>`;
     });
 
-    html += '</table>';
-    document.getElementById('tabelaVendas').innerHTML = html;
+    document.getElementById('tabelaProgramador').innerHTML = html + '</table>';
 }
 
-async function deletarVenda(id) {
-    if (!confirm(`Excluir venda ID ${id}?`)) return;
+async function deletarProgramador(id) {
+    if (!confirm(`Excluir programador ID ${id}?`)) return;
 
-    await fetch(`http://localhost:3000/vendaCombustivel/${id}`, { method: 'DELETE' });
-    document.getElementById(`venda-${id}`).remove();
+    await fetch(`http://localhost:3000/deleteProgramador/${id}`, { method: 'DELETE' });
+    document.getElementById(`dados-${id}`).remove();
 }
 
-window.onload = carregarVendas;
+window.onload = carregarDados;
+
+//deletarVenda 
